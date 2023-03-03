@@ -1,6 +1,6 @@
 import '../../styles/globals.css'
 import React from 'react'
-import Citypanelsmall from './citypanelsmall'
+import Citypanelsmall from '../components/citypanelsmall'
 const UUID = require('uuid-int');
 
 const gen = UUID(0);

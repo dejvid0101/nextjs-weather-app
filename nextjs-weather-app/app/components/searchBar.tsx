@@ -8,7 +8,7 @@ export default function searchBar({CitiesObj}:any) {
     const [inputValue, setInputValue]=useState("");
 
 // called on input value change
-function changeStates(e){
+function changeStates(e:any){
 // pass data to autocomplete
 handleAutocomplete(e);
 //pass current field value to state so clearAutocomplete func can clear input field
@@ -33,8 +33,13 @@ setInputValue(e.target.value);
             return city.name.toLowerCase().trim().startsWith(event.target.value.toLowerCase().trim());
         });
 
-        //append clearAutocomplete function to first element inside matching cities list
+
+if (results[0]!=undefined){
+//append clearAutocomplete function to first element inside matching cities list
 results[0].clearInput=clearAutocomplete;
+}
+
+
 
         setAutoComplete(results);
         
