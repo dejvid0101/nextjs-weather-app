@@ -1,5 +1,7 @@
 import React from 'react'
 
+//data to fetch: https://api.open-meteo.com/v1/forecast?latitude=45.8&longitude=15.9&daily=weathercode&daily=temperature_2m_max&timezone=auto&daily=apparent_temperature_max&daily=precipitation_probability_max
+
 export default function forecast3days() {
   return (
     

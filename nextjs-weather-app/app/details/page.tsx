@@ -31,8 +31,8 @@ console.log(currentWeatherObject);
 //weather details for location
     return (
     <div className="container grid mx-4 lg:mx-32 w-auto h-auto bg-violet-200 gap-y-4 lg:gap-4 lg:grid-cols-2">
-<div className="text-indigo-800 h-32 text-4xl antialiased text-5xl grid items-center lg:col-span-2">{searchParams?.name}, {searchParams?.region}</div>
-<Currentweather></Currentweather>
+<div className="text-indigo-800 h-32 text-4xl antialiased text-5xl font-poppins grid items-center lg:col-span-2">{searchParams?.name}, {searchParams?.region}</div>
+<Currentweather WeatherProp={currentWeatherObject}></Currentweather>
 <HourlyComponent></HourlyComponent>
 <TomorrowComponent></TomorrowComponent>
 <Forecast3days></Forecast3days>
