@@ -21,6 +21,7 @@ const weatherDescMap = new Map([
     ["75", "Heavy snowfall"],//snowy-1.svg
     ["77", "Snowy"],//snowy-1.svg,
     ["85", "Snow showers"],//snowy-1.svg,
+    ["86", "Snow showers"],//snowy-1.svg,
     ["95", "Thunderstorm"],//snowy-1.svg,
     ["96", "Thunderstorm"],//snowy-1.svg,
     ["99", "Thunderstorm"],//snowy-1.svg,
