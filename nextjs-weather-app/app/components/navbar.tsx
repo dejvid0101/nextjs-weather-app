@@ -4,8 +4,8 @@ import Hamburger from 'hamburger-react'
 import SearchBar from './searchBar'
 
 export default function navbar({CitiesObj}:any) {
-  //hamburger state
     const [isOpen, setOpen] = useState(false)
+
 
   return (
 

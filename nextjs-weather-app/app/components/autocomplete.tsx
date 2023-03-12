@@ -1,168 +1,55 @@
-import React, { forwardRef, useState, useImperativeHandle, useRef } from 'react'
+import React, {useState} from 'react'
 import Link from 'next/link'
 
-let keyPressCounter = 0;
-
 //autocomplete suggestions
-//forwardref to expose handlekeyboard function so its callable by input in searchBar
-export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
-  const targetUrl = "details?";
+export default function autocomplete({AutocompleteProps}:any) {
+const targetUrl="details?";
 
-  //state for keyboard selection 
-  const [HighlightedSuggestion, setHighlightedSuggestion] = useState('');
+    if(AutocompleteProps.length>2){
+  return (
+    //onclick calls parent function referenced in the first element of AutocompleteProps
+    <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
+        <Link href={targetUrl+"name="+AutocompleteProps[0].name+"&region="+AutocompleteProps[0].country}>
+    <div className='h-12 bg-white hover:bg-violet-100'>
+      <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
+      <br/>
+      <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
+    </div>
+    </Link>
 
-  const Link1 = useRef(null);
-  const Link2 = useRef(null);
-  const Link3 = useRef(null);
+    <Link href={targetUrl+"name="+AutocompleteProps[1].name+"&region="+AutocompleteProps[1].country}>
+    <div className='h-12 bg-white hover:bg-violet-100'>
+    <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[1].name}</span>
+    <br/>
+      <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[1].country}, {AutocompleteProps[1].subcountry}</span>
+  </div>
+  </Link>
 
-  //exposing function
-  useImperativeHandle(ref, () => ({
+  <Link href={targetUrl+"name="+AutocompleteProps[2].name+"&region="+AutocompleteProps[2].country}>
+  <div className='h-12 bg-white hover:bg-violet-100'>
+    <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[2].name}</span>
+    <br/>
+      <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[2].country}, {AutocompleteProps[2].subcountry}</span>
+  </div> 
+  </Link>
 
-    //function called by searchBar
-    handleKeyboard(event: any) {
-
-      highlightSelected();
-      chooseSelected();
-
-      function chooseSelected() {
-        //if key pressed is enter, click selected suggestion and update state used to highlight suggestion
-        if ((event.keyCode == 13) && (keyPressCounter > 0) && (keyPressCounter < 4)) {
-
-          switch (keyPressCounter) {
-            case 1: {
-              keyPressCounter = 0;
-              setHighlightedSuggestion(keyPressCounter.toString());
-              if (Link1.current != null) {
-                Link1.current.click();
-              }
-
-              break;
-            }
-            case 2: {
-              keyPressCounter = 0;
-              setHighlightedSuggestion(keyPressCounter.toString());
-              Link2.current.click();
-
-              break;
-            }
-            case 3: {
-              keyPressCounter = 0;
-              setHighlightedSuggestion(keyPressCounter.toString());
-              Link3.current.click();
-
-              break;
-            }
-            default: {
-              break;
-            }
-          }
-        }
-      }
-
-      function highlightSelected() {
-        //on down arrow pressed
-        if ((event.keyCode == 40) && (keyPressCounter >= 0) && (keyPressCounter < 5)) {
-          if (keyPressCounter < 4) {
-//count the number of times down arrow pressed, limit at 4 because three suggestions are rendered max
-            keyPressCounter++;
-          }
-
-          setHighlightedSuggestion(keyPressCounter.toString());
-        };
-
-        //on up arrow pressed
-        if ((event.keyCode == 38) && (keyPressCounter >= 0) && (keyPressCounter < 5)) {
-          if (keyPressCounter > 0) {
-            keyPressCounter--;
-          }
-          setHighlightedSuggestion(keyPressCounter.toString());
-        };
-      }
+  </div>
+  )
+    } else if((AutocompleteProps.length>=1)&&(AutocompleteProps.length<=2)){
+        return(
+         
+            <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'> 
+            <Link href={targetUrl+"name="+AutocompleteProps[0].name+"&region="+AutocompleteProps[0].country}>
+    <div className='h-12 bg-white hover:bg-violet-100'>
+      <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
+      <br/>
+      <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
+    </div>
+     </Link>
+    </div>
+   
+        )
+    } else{
+        return <div></div>;
     }
-  }));
-
-  //read existing cities from browser storage and add current
-  function saveCityToStorage() {
-
-    let citiesArr = [];
-    const JSONCities = localStorage.getItem('cities');
-    if (JSONCities != null) {
-
-      //if cities exist, save to array & push new city BUT FIRST clear oldest city
-      const lastArr = JSON.parse(JSONCities);
-
-      if (lastArr.length > 4) {
-        lastArr.shift();
-      }
-
-      lastArr.push({
-        name: AutocompleteProps[0].name,
-        country: AutocompleteProps[0].country,
-        subcountry: AutocompleteProps[0].subcountry
-      });
-      citiesArr = lastArr;
-    } else {
-
-      citiesArr.push(
-        {
-          name: AutocompleteProps[0].name,
-          country: AutocompleteProps[0].country,
-          subcountry: AutocompleteProps[0].subcountry
-        }
-      );
-
-    }
-
-    localStorage.setItem('cities', JSON.stringify(citiesArr));
-    console.log(localStorage.getItem('cities'));
-
-  };
-
-  if (AutocompleteProps.length > 2) {
-    return (
-      //onclick calls parent function referenced in the first element of AutocompleteProps
-      <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
-        <Link ref={Link1} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
-          <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
-            <br />
-            <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
-          </div>
-        </Link>
-
-        <Link ref={Link2} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[1].name + "&region=" + AutocompleteProps[1].country}>
-          <div className={`h-12 ${HighlightedSuggestion == '2' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[1].name}</span>
-            <br />
-            <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[1].country}, {AutocompleteProps[1].subcountry}</span>
-          </div>
-        </Link>
-
-        <Link ref={Link3} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[2].name + "&region=" + AutocompleteProps[2].country}>
-          <div className={`h-12 ${HighlightedSuggestion == '3' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[2].name}</span>
-            <br />
-            <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[2].country}, {AutocompleteProps[2].subcountry}</span>
-          </div>
-        </Link>
-
-      </div>
-    )
-  } else if ((AutocompleteProps.length >= 1) && (AutocompleteProps.length <= 2)) {
-    return (
-
-      <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
-        <Link ref={Link1} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
-          <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
-            <br />
-            <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
-          </div>
-        </Link>
-      </div>
-
-    )
-  } else {
-    return <div></div>;
-  }
-})
+}
