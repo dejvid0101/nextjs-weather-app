@@ -41,14 +41,18 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
             case 2: {
               keyPressCounter = 0;
               setHighlightedSuggestion(keyPressCounter.toString());
+              if (Link2.current != null) {
               Link2.current.click();
+              }
 
               break;
             }
             case 3: {
               keyPressCounter = 0;
               setHighlightedSuggestion(keyPressCounter.toString());
+              if (Link3.current != null) {
               Link3.current.click();
+              }
 
               break;
             }
@@ -82,7 +86,7 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
   }));
 
   //read existing cities from browser storage and add current
-  function saveCityToStorage() {
+  function saveCityToStorage(pos:number) {
 
     let citiesArr = [];
     const JSONCities = localStorage.getItem('cities');
@@ -95,19 +99,20 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
         lastArr.shift();
       }
 
+      //add city on selected position in suggestion list
       lastArr.push({
-        name: AutocompleteProps[0].name,
-        country: AutocompleteProps[0].country,
-        subcountry: AutocompleteProps[0].subcountry
+        name: AutocompleteProps[pos].name,
+        country: AutocompleteProps[pos].country,
+        subcountry: AutocompleteProps[pos].subcountry
       });
       citiesArr = lastArr;
     } else {
 
       citiesArr.push(
         {
-          name: AutocompleteProps[0].name,
-          country: AutocompleteProps[0].country,
-          subcountry: AutocompleteProps[0].subcountry
+          name: AutocompleteProps[pos].name,
+          country: AutocompleteProps[pos].country,
+          subcountry: AutocompleteProps[pos].subcountry
         }
       );
 
@@ -122,7 +127,7 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
     return (
       //onclick calls parent function referenced in the first element of AutocompleteProps
       <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
-        <Link ref={Link1} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
+        <Link ref={Link1} onClick={()=>saveCityToStorage(0)} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
           <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
             <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
             <br />
@@ -130,7 +135,7 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
           </div>
         </Link>
 
-        <Link ref={Link2} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[1].name + "&region=" + AutocompleteProps[1].country}>
+        <Link ref={Link2} onClick={()=>saveCityToStorage(1)} href={targetUrl + "name=" + AutocompleteProps[1].name + "&region=" + AutocompleteProps[1].country}>
           <div className={`h-12 ${HighlightedSuggestion == '2' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
             <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[1].name}</span>
             <br />
@@ -138,7 +143,7 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
           </div>
         </Link>
 
-        <Link ref={Link3} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[2].name + "&region=" + AutocompleteProps[2].country}>
+        <Link ref={Link3} onClick={()=>saveCityToStorage(2)} href={targetUrl + "name=" + AutocompleteProps[2].name + "&region=" + AutocompleteProps[2].country}>
           <div className={`h-12 ${HighlightedSuggestion == '3' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
             <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[2].name}</span>
             <br />
@@ -152,7 +157,7 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
     return (
 
       <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
-        <Link ref={Link1} onClick={saveCityToStorage} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
+        <Link ref={Link1} onClick={()=>saveCityToStorage(0)} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
           <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
             <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
             <br />

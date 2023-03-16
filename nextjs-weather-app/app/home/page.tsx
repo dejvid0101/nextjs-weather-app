@@ -84,8 +84,11 @@ export default async function page() {
 const info=await prepareProp();
 
   return (
-    <div className='mx-64'> 
+    <>
+    <div className='modalPlaceholder invisible p-2 absolute w-96 h-[40rem] lg:w-[36rem] lg:h-[40rem] bg-indigo-50 border-indigo-900 border-solid border-8 rounded-xl right-2/4 top-2/4 -translate-y-2/4 translate-x-2/4'></div>
+    <div className='content mx-64'> 
       <Citypanelsmall key={gen.uuid()} WeatherInfo={info}></Citypanelsmall>
-    </div> 
+    </div>
+     </>
   )
 }

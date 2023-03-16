@@ -10,7 +10,7 @@ export default function navbar({CitiesObj}:any) {
   return (
 
 //cities list is passed further to searchbar component
-    <div className='grid grid-cols-12 h-12 fixed relative bg-purple-400 w-full rounded-b-lg'>
+    <div className='content grid grid-cols-12 h-12 fixed relative bg-purple-400 w-full rounded-b-lg'>
         <div className='self-center justify-self-center col-span-1'>
       Logo
       </div>

@@ -42,11 +42,19 @@ function prepareImg(code) {
         return '/cloudy-day-2.svg'
          break; 
       } 
-      case 3||48:{ 
+      case 3:
+      case 48:
+      case 45: { 
         return '/cloudy.svg'
          break; 
       } 
-      case 51||53||55||56||57||80||81: { 
+      case 51:
+      case 53:
+      case 55:
+      case 56:
+      case 57:
+      case 80:
+      case 81: { 
         return '/rainy-1.svg'
          break; 
       } 
@@ -62,16 +70,21 @@ function prepareImg(code) {
         return '/rainy-6.svg'
          break; 
       } 
-      case 71||85||77: { 
+      case 71:
+      case 85:
+      case 77: { 
         return '/snowy-5.svg'
          break; 
       }
-      case 73||75||86: { 
+      case 73:
+      case 75:
+      case 86: { 
         return '/snowy-6.svg'
          break; 
       }
-
-      case 95||96||99: { 
+      case 95:
+      case 96:
+      case 99: { 
         return '/thunder.svg'
          break; 
       }

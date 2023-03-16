@@ -35,13 +35,16 @@ const weatherObject=await getWeatherInfo(searchParams?.name);
 
 //weather details for location
     return (
-    <div className="container grid mx-4 lg:mx-32 w-auto h-auto bg-violet-100 gap-y-4 lg:gap-4 lg:grid-cols-2">
+      <>
+      <div className='modalPlaceholder invisible p-2 absolute w-96 h-[40rem] lg:w-[36rem] lg:h-[40rem] bg-indigo-50 border-indigo-900 border-solid border-8 rounded-xl right-2/4 top-2/4 -translate-y-2/4 translate-x-2/4'></div>
+    <div className="content container grid mx-4 lg:mx-32 w-auto h-auto gap-y-4 lg:gap-4 lg:grid-cols-2">
 <div className="text-indigo-800 h-32 text-4xl antialiased text-5xl font-poppins grid items-center lg:col-span-2">{searchParams?.name}, {searchParams?.region}</div>
 <Currentweather WeatherProp={weatherObject}></Currentweather>
 <TodayComponent WeatherProp={weatherObject}></TodayComponent>
-<TomorrowComponent></TomorrowComponent>
-<Forecast3days></Forecast3days>
+<TomorrowComponent WeatherProp={weatherObject}></TomorrowComponent>
+<Forecast3days WeatherProp={weatherObject}></Forecast3days>
     </div>
+    </>
   )
 }
 

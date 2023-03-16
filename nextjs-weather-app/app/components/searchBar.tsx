@@ -1,20 +1,31 @@
 import React, { useState, useRef } from 'react'
 import { Autocomplete } from './autocomplete'
+import ResultsModal from './resultsmodal'
 
 
 
 export default function searchBar({ CitiesObj }: any) {
+    const [toggleResultsModal, setTRM] = useState(false);
     const [autoComplete, setAutoComplete] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const autocompleteCompRef = useRef();
 
-    //call & pass keyboard event to function on autocomplete component (autocomplete keyboard interactivity)
-    function passKeyboardEvent(event:any){
+    function onSearch(){
+        setTRM(true);
+    }
 
-        if(autocompleteCompRef.current!=undefined){
+    //function passed to SearchModal
+    const closeModal =()=>{
+        setTRM(false);
+    }
+
+    //call & pass keyboard event to function on autocomplete component (autocomplete keyboard interactivity)
+    function passKeyboardEvent(event: any) {
+
+        if (autocompleteCompRef.current != undefined) {
             autocompleteCompRef.current.handleKeyboard(event);
         }
-        
+
     }
 
 
@@ -103,9 +114,12 @@ export default function searchBar({ CitiesObj }: any) {
 
 
                 <Autocomplete ref={autocompleteCompRef} AutocompleteProps={autoComplete}></Autocomplete>
-                <button className="transition hover:text-white hover:bg-purple-800 px-4 text-violet-800 bg-white border-l rounded ">
+                <button onClick={onSearch} className="transition hover:text-white hover:bg-purple-800 px-4 text-violet-800 bg-white border-l rounded ">
                     Search
                 </button>
+                {/* modal launched when toggleResultsModal state is true */}
+                <ResultsModal closeFn={closeModal} toggle={toggleResultsModal} citiesObj={CitiesObj} input={inputValue}></ResultsModal>
+
             </div>
 
         </div>
