@@ -126,28 +126,28 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
   if (AutocompleteProps.length > 2) {
     return (
       //onclick calls parent function referenced in the first element of AutocompleteProps
-      <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
+      <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12 border-violet-100 border-2 rounded-md'>
         <Link ref={Link1} onClick={()=>saveCityToStorage(0)} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
           <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
+            <span className='px-1 py-1 text-violet-800'>{AutocompleteProps[0].name}</span>
             <br />
-            <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
+            <span className='px-1 py-1 text-violet-800 text-xs'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
           </div>
         </Link>
 
         <Link ref={Link2} onClick={()=>saveCityToStorage(1)} href={targetUrl + "name=" + AutocompleteProps[1].name + "&region=" + AutocompleteProps[1].country}>
           <div className={`h-12 ${HighlightedSuggestion == '2' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[1].name}</span>
+            <span className='px-1 py-1 text-violet-800'>{AutocompleteProps[1].name}</span>
             <br />
-            <span className='px-1 py-1 text-violet-700 text-xs'>{AutocompleteProps[1].country}, {AutocompleteProps[1].subcountry}</span>
+            <span className='px-1 py-1 text-violet-800 text-xs'>{AutocompleteProps[1].country}, {AutocompleteProps[1].subcountry}</span>
           </div>
         </Link>
 
         <Link ref={Link3} onClick={()=>saveCityToStorage(2)} href={targetUrl + "name=" + AutocompleteProps[2].name + "&region=" + AutocompleteProps[2].country}>
           <div className={`h-12 ${HighlightedSuggestion == '3' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[2].name}</span>
+            <span className='px-1 py-1 text-violet-800'>{AutocompleteProps[2].name}</span>
             <br />
-            <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[2].country}, {AutocompleteProps[2].subcountry}</span>
+            <span className='px-1 py-1 text-xs text-violet-800'>{AutocompleteProps[2].country}, {AutocompleteProps[2].subcountry}</span>
           </div>
         </Link>
 
@@ -159,9 +159,9 @@ export const Autocomplete = forwardRef(({ AutocompleteProps }: any, ref) => {
       <div onClick={AutocompleteProps[0].clearInput} className='w-1/2 absolute mt-12'>
         <Link ref={Link1} onClick={()=>saveCityToStorage(0)} href={targetUrl + "name=" + AutocompleteProps[0].name + "&region=" + AutocompleteProps[0].country}>
           <div className={`h-12 ${HighlightedSuggestion == '1' ? "bg-violet-100" : "bg-white"} hover:bg-violet-100`}>
-            <span className='px-1 py-1 text-violet-700'>{AutocompleteProps[0].name}</span>
+            <span className='px-1 py-1 text-violet-800'>{AutocompleteProps[0].name}</span>
             <br />
-            <span className='px-1 py-1 text-xs text-violet-700'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
+            <span className='px-1 py-1 text-xs text-violet-800'>{AutocompleteProps[0].country}, {AutocompleteProps[0].subcountry}</span>
           </div>
         </Link>
       </div>

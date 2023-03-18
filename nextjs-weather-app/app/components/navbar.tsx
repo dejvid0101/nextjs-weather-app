@@ -4,8 +4,6 @@ import Hamburger from 'hamburger-react'
 import SearchBar from './searchBar'
 
 export default function navbar({CitiesObj}:any) {
-  //hamburger state
-    const [isOpen, setOpen] = useState(false)
 
   return (
 
@@ -18,7 +16,6 @@ export default function navbar({CitiesObj}:any) {
         <SearchBar CitiesObj={CitiesObj}></SearchBar>
       </div>
       <div className='self-center justify-self-center col-span-1'>
-      <Hamburger toggled={isOpen} toggle={setOpen} />
       </div>
     </div>
   )
